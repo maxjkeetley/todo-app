@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+</head>
+<body>
+    <h1>Loops Test</h1>
+    <button onClick="countUp()">Count up</button>
+    <button onClick="countDown()">Count down</button>
+    <p  id = "output">Press a button</p>
+    <script>
+        function countUp() {
+            let result = ""
+            for (let i = 1; i <= 5; i++) {
+                result = result + i + " "
+            }
+            document.getElementById("output").innerText = result
+        }
+        function countDown() {
+            let result = ""
+            for (let i = 5; i >= 1; i--) {
+                result = result + i + " "
+            }
+            document.getElementById("output").innerText = result
+        }
+       
+    </script>
+
+</body>
+</html> 

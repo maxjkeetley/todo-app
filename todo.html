@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-do app</title>
+    <style>
+      body { font-family: sans-serif; max-width: 500px; margin: 40px auto; padding: 0 20px; }
+      .task { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #eee; }
+      .task.done span { text-decoration: line-through; color: #999; }
+      button { cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <h1>To-do</h1>
+
+    <div style="display: flex; gap: 8px; margin-bottom: 20px;">
+      <input id="taskInput" type="text" placeholder="Add a task..." style="flex: 1; padding: 8px;" />
+      <button onclick="addTask()">Add</button>
+    </div>
+
+    <div id="taskList"></div>
+
+    <script>
+      let tasks = []
+
+      function addTask() {
+        let input = document.getElementById("taskInput")
+        let text = input.value.trim()
+
+        if (text === "") return
+
+        tasks.push({ text: text, done: false })
+        input.value = ""
+        renderTasks()
+      }
+
+      function renderTasks() {
+        let list = document.getElementById("taskList")
+        list.innerHTML = ""
+
+        tasks.forEach(function(task, index) {
+          let div = document.createElement("div")
+          div.className = "task" + (task.done ? " done" : "")
+          div.innerHTML = `
+            <input type="checkbox" ${task.done ? "checked" : ""} onclick="toggleTask(${index})">
+            <span style="flex:1">${task.text}</span>
+            <button onclick="deleteTask(${index})">Delete</button>
+          `
+          list.appendChild(div)
+        })
+      }
+
+      function toggleTask(index) {
+        tasks[index].done = !tasks[index].done
+        renderTasks()
+      }
+
+      function deleteTask(index) {
+        tasks.splice(index, 1)
+        renderTasks()
+      }
+    </script>
+  </body>
+</html>
